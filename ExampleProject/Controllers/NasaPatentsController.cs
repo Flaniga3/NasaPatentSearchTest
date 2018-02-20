@@ -40,12 +40,12 @@ namespace ExampleProject.Controllers
             // filter and sort the top 155 results:
             // Keep it simple and just filter by category, abstract, and title
             IEnumerable<NasaPatentModel> filteredSet = null;
-            if (patents != null)
+            if (patents != null && !String.IsNullOrEmpty(query))
             {
                 filteredSet = patents
-                    .Where(x => (String.IsNullOrEmpty(x.Abstract) && x.Abstract.Contains(query))
-                                || (String.IsNullOrEmpty(x.Title) && x.Title.Contains(query))
-                                || (String.IsNullOrEmpty(x.Category) && x.Category.Contains(query)))
+                    .Where(x => (!String.IsNullOrEmpty(x.Abstract) && x.Abstract.Contains(query))
+                                || (!String.IsNullOrEmpty(x.Title) && x.Title.Contains(query))
+                                || (!String.IsNullOrEmpty(x.Category) && x.Category.Contains(query)))
                     .OrderBy(x => x.Title);
             }
 
